@@ -72,7 +72,8 @@ public final class Fraction implements Comparable<Fraction> {
 
     @Override
     public int hashCode() {
-        return (this.numerator * 31) + this.denominator;
+        // Adjust the prime numbers based on your preference
+        return (31 * this.numerator) + this.denominator;
     }
 
     private static int gcd(int a, int b) {
@@ -83,8 +84,8 @@ public final class Fraction implements Comparable<Fraction> {
     }
 
     public static void main(String[] args) {
-        Fraction lowerBound = Fraction.of(4, 11);
-        Fraction upperBound = Fraction.of(18, 10);
+        Fraction lowerBound = Fraction.of(3, 28);
+        Fraction upperBound = Fraction.of(4, 25);
 
         int x = 5257;
 
@@ -102,7 +103,6 @@ public final class Fraction implements Comparable<Fraction> {
                 count++;
             }
         }
-
         System.out.println(count);
         System.out.println(java.time.Instant.now());
     }

@@ -1,3 +1,5 @@
+import java.util.TreeSet;
+
 public final class Fraction implements Comparable<Fraction> {
 
     private final int numerator;
@@ -81,25 +83,27 @@ public final class Fraction implements Comparable<Fraction> {
     }
 
     public static void main(String[] args) {
-        Fraction fraction1 = Fraction.of(1, 2);
-        Fraction fraction2 = Fraction.of(3, 4);
+        Fraction lowerBound = Fraction.of(4, 11);
+        Fraction upperBound = Fraction.of(18, 10);
 
-        Fraction sum = fraction1.add(fraction2);
-        System.out.println("Sum: " + sum);
+        int x = 5257;
 
-        Fraction difference = fraction1.subtract(fraction2);
-        System.out.println("Difference: " + difference);
+        TreeSet<Fraction> fractions = new TreeSet<>();
 
-        Fraction product = fraction1.multiply(fraction2);
-        System.out.println("Product: " + product);
+        for (int numerator = 1; numerator < x; numerator++) {
+            for (int denominator = numerator + 1; denominator <= x; denominator++) {
+                fractions.add(Fraction.of(numerator, denominator));
+            }
+        }
 
-        Fraction quotient = fraction1.divide(fraction2);
-        System.out.println("Quotient: " + quotient);
+        int count = 0;
+        for (Fraction fraction : fractions) {
+            if (fraction.compareTo(lowerBound) > 0 && fraction.compareTo(upperBound) < 0) {
+                count++;
+            }
+        }
 
-        Fraction reciprocal = fraction1.reciprocal();
-        System.out.println("Reciprocal of fraction1: " + reciprocal);
-
-        double realValue = fraction1.toReal();
-        System.out.println("Real value of fraction1: " + realValue);
+        System.out.println(count);
+        System.out.println(java.time.Instant.now());
     }
 }
